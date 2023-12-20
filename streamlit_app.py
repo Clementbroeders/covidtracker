@@ -68,7 +68,7 @@ growth_rate_yesterday = np.round(average_cases_yesterday / average_cases_before_
 date_country_update = country_filter['dateRep'].max().strftime('%d/%m/%Y')
 st.text(f'Date dernier update du pays selectionné : {date_country_update}')
 
-st.metric('Taux de croissance actuel', value = f'{growth_rate}', delta = f'{np.round(growth_rate - growth_rate_yesterday, 3)}')
+st.metric(f'Taux de croissance actuel en {country}', value = f'{growth_rate}', delta = f'{np.round(growth_rate - growth_rate_yesterday, 3)}')
 
 st.markdown("""
     Le taux de croissance compare le nombre moyen de cas d'aujourd'hui au nombre moyen de cas d'hier. Si le taux de croissance est > 1, le virus se propage. Si le taux de croissance est inférieur à 1, la propagation ralentit.
@@ -77,11 +77,11 @@ st.markdown("""
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader('Nouveaux cas')
+    st.subheader(f'Nouveaux cas en {country}')
     fig3 = px.line(country_filter.groupby('dateRep')[['cases', 'average_cases']].sum(), y = ['cases', 'average_cases'])
     st.plotly_chart(fig3, use_container_width=True)
 
 with col2:
-    st.subheader('Morts')
+    st.subheader(f'Morts en {country}')
     fig4 = px.line(country_filter.groupby('dateRep')[['deaths', 'average_deaths']].sum(), y = ['deaths', 'average_deaths'])
     st.plotly_chart(fig4, use_container_width=True)
