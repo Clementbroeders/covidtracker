@@ -40,7 +40,7 @@ if st.checkbox('Afficher les données'):
 date_update = data['dateRep'].max().strftime('%d/%m/%Y')
 st.text(f'Date dernier update des données : {date_update}')
 
-st.header('Analyse dans le monde')
+st.header('ANALYSE EN EUROPE')
 st.subheader('Cumul du nombre de cas')
 
 fig = px.line(data.sort_values('dateRep'), x = 'dateRep', y = 'cumulated_cases')
@@ -52,7 +52,7 @@ fig2 = px.line(data.groupby('dateRep')[['cases', 'average_cases']].sum().sort_va
 st.plotly_chart(fig2, use_container_width=True)
 
 
-st.header('Analyse par pays')
+st.header('ANALYSE PAR PAYS')
 
 country = st.selectbox("Selectionner un pays", data["countriesAndTerritories"].sort_values().unique(), index = 9)
 country_filter = data[data['countriesAndTerritories'] == country]
